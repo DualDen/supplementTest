@@ -1,0 +1,55 @@
+.navContainer{
+    position: relative;
+    border-right: 1px solid rgba(0,0,0,.32);
+
+}
+.logoBlock{
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 35px 40px 40px;
+    align-items: center;
+}
+.burger{
+    display: block;
+    width: 18px;
+    height: 0px;
+    border: 2px solid rgba(0, 0, 0, 0.87);
+    position: relative;
+    margin-left: 46px;
+    border-radius: 20px;
+}
+.burger:before{
+    content: "";
+    display: block;
+    width: 18px;
+    height: 0px;
+    border: 2px solid rgba(0, 0, 0, 0.87);
+    position: absolute;
+    top: -9px;
+    left: -2px;
+    border-radius: 20px;
+}
+.burger:after{
+    content: "";
+    display: block;
+    width: 18px;
+    height: 0px;
+    border: 2px solid rgba(0, 0, 0, 0.87);
+    position: absolute;
+    bottom: -9px;
+    left: -2px;
+    border-radius: 20px;
+}
+.navBlock p{
+    background: #2C59A5;
+    color: #fff;
+    font-weight: 500;
+    padding: 12px 0 12px 40px;
+}
+.navList{
+    list-style: none;
+    padding-left: 58px;
+}
+.navList__item{
+    margin-bottom: 24px;
+}

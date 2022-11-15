@@ -1,0 +1,6 @@
+.courseContainer{
+    width: 280px;
+    height: 100%;
+    border-left:1px solid #333;
+    background: #333;
+}
