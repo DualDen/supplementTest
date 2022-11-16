@@ -1,3 +1,72 @@
 .cardsContainer{
-    width: 1360px;
+    width: 844px;
+    margin: 0 auto;
+    padding: 46px 0 100px 0;
+}
+.filters{
+    display: flex;
+    margin-bottom: 20px;
+}
+.filtersItem.first{
+margin-right: 212px;
+}
+.filtersItem.second{
+    margin-right: 256px;
+}
+.medications{
+    overflow: auto;
+    height: 100%;
+    max-height: 100vh;
+}
+.medicationImg{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 24px;
+    margin-top: 10px;
+}
+.medication{
+    display: flex;
+    margin-top: 20px;
+}
+.medicationTitle{
+    margin-right: 24px;
+    width: 204px;
+    padding: 24px 0;
+}
+.medicationDescription{
+    width: 252px;
+    margin-right: 81px;
+    padding: 18px 0;
+}
+.medicationPrice{
+    margin-right: 36.67px;
+    font-weight: 700;
+    width: 52px;
+    padding: 24px 0;
+}
+.medicationButton{
+    padding: 8px 16px;
+    color: #2662C9;
+    border: 2px solid #2662C9;
+    border-radius: 20px;
+    max-height: 36px;
+    margin-top: 15px;
+    background: #fff;
+    cursor: pointer;
+    transition: .3s;
+}
+.medicationButton:hover{
+    background: #2662C9;
+    color: #fff;
+}
+::-webkit-scrollbar{
+    width: 10px;
+}
+::-webkit-scrollbar-track{
+    background: rgba(0,0,0,0.1);
+}
+::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background: rgba(0,0,0,0.3);
 }

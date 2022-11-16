@@ -24,7 +24,25 @@ let Cards = (props) => {
 
     return (
         <div className='cardsContainer'>
-            10
+           <div className="filters">
+               <div className='filtersItem first'>Биодобавка</div>
+               <div className='filtersItem second'>Описание</div>
+               <div className='filtersItem third'>Цена за шт.</div>
+           </div>
+            <div className='medications'>
+                {props.cards.map(c => {
+                    return (
+                        <div className='medication'>
+                            <img className='medicationImg' src={c.Picture} alt=""/>
+                            <span className='medicationTitle'>{c.GoodsCommercialName}</span>
+                            <span className='medicationDescription'>{c.CommercialDescription}</span>
+                            <span className='medicationPrice'>{c.CurrentPrices} ₽</span>
+                            <button className='medicationButton'>Добавить</button>
+
+                        </div>
+                    )
+                })}
+            </div>
         </div>
     )
 

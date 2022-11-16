@@ -3,6 +3,9 @@ body{
   font-family: "Roboto";
 }
 
+ul{
+  list-style: none;
+}
 .App {
   display: flex;
   justify-content: space-between;
