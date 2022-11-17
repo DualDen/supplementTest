@@ -1,10 +1,13 @@
 import { combineReducers, createStore } from "redux";
-import mainReducer from "./main-reducer";
+import medicationsReducer from "./medications-reducer";
 
 const reducers = combineReducers({
-    mainReducer: mainReducer,
+    medicationsReducer: medicationsReducer,
 });
 
 let store = createStore(reducers);
+
+window.store = store;
+
 
 export default store;

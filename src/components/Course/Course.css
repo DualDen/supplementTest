@@ -1,6 +1,23 @@
 .courseContainer{
-    width: 280px;
-    height: 100%;
+    width: 215px;
     border-left: 1px solid rgba(0,0,0,.32);
     background: #F9F9F9;
+    padding: 12px 32px 0 32px;
+}
+
+.courseIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 24px;
+}
+.courseTitle{
+    display: flex;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 32px;
+    height: auto;
+}
+.courseDescription{
+    margin-left: 32px;
 }
