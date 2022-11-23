@@ -1,44 +1,18 @@
 .navContainer{
     position: relative;
     border-right: 1px solid rgba(0,0,0,.32);
+    width: 279px;
+    transition: .4s;
 
+}
+.navContainer.short{
+    width: 76px;
 }
 .logoBlock{
     display: flex;
     justify-content: space-between;
     padding: 40px 35px 40px 40px;
     align-items: center;
-}
-.burger{
-    display: block;
-    width: 18px;
-    height: 0px;
-    border: 2px solid rgba(0, 0, 0, 0.87);
-    position: relative;
-    margin-left: 46px;
-    border-radius: 20px;
-}
-.burger:before{
-    content: "";
-    display: block;
-    width: 18px;
-    height: 0px;
-    border: 2px solid rgba(0, 0, 0, 0.87);
-    position: absolute;
-    top: -9px;
-    left: -2px;
-    border-radius: 20px;
-}
-.burger:after{
-    content: "";
-    display: block;
-    width: 18px;
-    height: 0px;
-    border: 2px solid rgba(0, 0, 0, 0.87);
-    position: absolute;
-    bottom: -9px;
-    left: -2px;
-    border-radius: 20px;
 }
 .navBlock{
     border-bottom: 1px solid rgba(0,0,0,.32);
@@ -83,4 +57,24 @@
     align-items: center;
     margin-right: 18px;
     margin-left: 42px;
+}
+.burgerIcon{
+    margin-top: 50px;
+    padding: 0 24px;
+}
+.navShortList{
+    padding: 0;
+}
+.navShortList li{
+    padding: 8px 24px;
+    margin-bottom: 6px;
+}
+.navShortList li:last-child{
+    margin-bottom: 0;
+}
+.listItemActive{
+    background: #2C59A5;
+}
+.listItemActive img{
+    filter: invert(1);
 }

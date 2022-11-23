@@ -4,6 +4,7 @@ import axios from 'axios';
 import './Medications.css'
 import Loader from "../Loader/Loader";
 import Modal from "./Modal/Modal";
+import {setIsOpenedAC} from "../../Redux/medications-reducer";
 
 let Medications = (props) => {
     useEffect(() => {
@@ -22,21 +23,25 @@ let Medications = (props) => {
         "accept": "application/json",
     }
 
-    // let modalCreator = (el) => {
-    //     let appContainer = document.querySelector('.App');
-    //     let modalOverlay = document.createElement('div');
-    //     modalOverlay.className = 'modalOverlay';
-    //     appContainer.insertAdjacentElement('afterbegin',modalOverlay);
-    //     let modalContainer = document.createElement('div');
-    //     modalContainer.className = 'modalContainer';
-    //     modalOverlay.append(modalContainer);
-    // }
+    let modalRemover = () => {
+        let modal = document.querySelector('.modalOverlay');
+        let appContainer = document.querySelector('.App');
+        appContainer.insertAdjacentElement('afterbegin',modal);
+    }
 
 
     return (
 
         <div className='medicationsContainer' id='medicationsContainer'>
-            <Modal modal={props.modal}/>
+            <Modal
+                courseMedications={props.courseMedications}
+                setTimes={props.setTimes}
+                setIsAdded={props.setIsAdded}
+                addCourseMedications={props.addCourseMedications}
+                setFrequencies={props.setFrequencies} setTime={props.setTime} selects={props.selects}
+                setIsOpened={props.setIsOpened} modal={props.modal} isOpened={props.isOpened}
+                setDose={props.setDose} setTimesPerDay={props.setTimesPerDay}
+            />
            <div className="filters">
                <div className='filtersItem first'>Биодобавка</div>
                <div className='filtersItem second'>Описание</div>
@@ -50,8 +55,16 @@ let Medications = (props) => {
                             <span className='medicationTitle'>{m.GoodsCommercialName}</span>
                             <span className='medicationDescription'>{m.CommercialDescription}</span>
                             <span className='medicationPrice'>{m.CurrentPrices} ₽</span>
-                            <button onClick={(e) => {props.setModal(m)}} className='medicationButton'>Добавить</button>
-
+                            <button onClick={(e) => {
+                                modalRemover();
+                                props.setModal(m);
+                                if(!props.isOpened){
+                                    props.setIsOpened(true)
+                                }
+                                else {
+                                    props.setIsOpened(false);
+                                }
+                            }} className={m.isAdded ? 'medicationButton added' : 'medicationButton'}>{m.isAdded ? "Добавлено" : "Добавить"}</button>
                         </div>
                     )
                 })}

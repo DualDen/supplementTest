@@ -1,8 +1,13 @@
 .courseContainer{
-    width: 215px;
+    width: 231px;
     border-left: 1px solid rgba(0,0,0,.32);
     background: #F9F9F9;
-    padding: 12px 32px 0 32px;
+    padding: 12px 24px 0 24px;
+    transition: .4s;
+}
+.courseContainer.large{
+    width: 679px;
+    overflow: auto;
 }
 
 .courseIcon{
@@ -15,9 +20,213 @@
     display: flex;
     font-weight: 700;
     font-size: 22px;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
     height: auto;
+    align-items: center;
 }
 .courseDescription{
     margin-left: 32px;
+}
+.courseItem{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.courseImg{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+.courseImgContainer{
+    margin-right: 16px;
+}
+.courseTitleText{
+    cursor: pointer;
+}
+.courseText{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 16px;
+    line-height: 20px;
+}
+.courseIcon svg{
+transform: rotate(0);
+    transition: .3s;
+}
+.courseIcon svg.rotate{
+    transform: rotate(180deg);
+}
+.courseTitleSelect{
+    display: flex;
+    width: auto;
+    margin-left: 69px;
+    align-items: center;
+}
+.courseTitleSelect.none{
+    display: none;
+}
+.courseTitleSelect select{
+    width: 256px;
+    height: 44px;
+    padding: 14px 12px;
+    border-radius: 8px;
+    border-color: rgba(0,0,0,.16);
+    appearance: none;
+    background: url(../../assets/images/downarrow.svg)  right 10px bottom 17px no-repeat;
+    cursor: pointer;
+}
+.courseTitleSelect select:after{
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 7px;
+}
+.courseTitleSelect select:focus{
+    outline: none;
+}
+.courseTitleSelectButton{
+    width: 101px;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px dashed #2662C9;
+    color: #2662C9;
+    margin-left: 33px;
+    cursor: pointer;
+    padding: 0;
+    height: 24px;
+}
+.courseLargeItem{
+    background: #fff;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.16);
+    padding-bottom: 21px;
+}
+.courseLargeItemTitle{
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0,0,0,.16);
+}
+.courseLargeItemDescription{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 368px;
+    white-space: nowrap;
+    text-align: right;
+
+}
+.courseLargeItemIcon{
+    margin-left: 21px;
+    margin-right: 21px;
+}
+.courseLargeItemTime{
+    margin-right: 56px;
+    width: 145px;
+}
+.courseLargeItemDeleteIcon{
+    margin-right: 20px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.courseLargeItemContentItem{
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    margin-left: 16px;
+}
+.courseLargeItemContentItem:last-child{
+    margin-bottom: 21px;
+}
+.courseLargeItemContentItemImg{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 16px;
+}
+
+.courseLargeItemContentItemSelect select{
+    width: 143px;
+    height: 44px;
+    padding: 14px 12px;
+    border-radius: 8px;
+    border-color: rgba(0,0,0,.16);
+    appearance: none;
+    background: url(../../assets/images/downarrow.svg)  right 10px bottom 17px no-repeat;
+    cursor: pointer;
+}
+.courseLargeItemContentItemSelect select:after{
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 7px;
+}
+.courseLargeItemContentItemSelect select:focus{
+    outline: none;
+}
+.courseLargeItemContentItemText{
+    width: 400px;
+    margin-right: 16px;
+}
+.courseLargeItemContentItemDelIcon{
+    margin-left: 21px;
+    cursor: pointer;
+}
+.supplementFacts{
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    padding-right: 24px;
+}
+.supplementFacts span{
+    margin-left: 23px;
+}
+::-webkit-scrollbar{
+    width: 10px;
+}
+::-webkit-scrollbar-track{
+    background: rgba(0,0,0,0.1);
+}
+::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background: rgba(0,0,0,0.3);
+}
+.courseLargeItemIconSvg{
+    transform: rotate(180deg);
+}
+.courseLargeItemName{
+    font-weight: 700;
+    width: 100%;
+}
+.courseLargeItemBioContent{
+    display: flex;
+    padding-left: 16px;
+    padding-top: 16px;
+    align-items: center;
+}
+.courseLargeBy{
+    display: flex;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+.courseLargeByItem{
+    padding: 14px 39px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+    color: rgba(0, 0, 0, 0.72);
+    transition: .3s;
+    cursor: pointer;
+}
+.courseLargeByItem.active{
+    color: #000;
+    font-weight: 500;
+    border-bottom: 1px solid #2662C9;
 }

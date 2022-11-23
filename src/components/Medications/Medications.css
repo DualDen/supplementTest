@@ -56,9 +56,17 @@ margin-right: 212px;
     cursor: pointer;
     transition: .3s;
 }
+.medicationButton.added{
+    background: #2662C9;
+    color: #fff;
+}
 .medicationButton:hover{
     background: #2662C9;
     color: #fff;
+}
+.medicationButton.added:hover{
+    background: #fff;
+    color: #2662C9;
 }
 ::-webkit-scrollbar{
     width: 10px;
@@ -69,20 +77,4 @@ margin-right: 212px;
 ::-webkit-scrollbar-thumb{
     border-radius: 10px;
     background: rgba(0,0,0,0.3);
-}
-.modalOverlay{
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,.5);
-    position: fixed;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.modalContainer{
-    width: 679px;
-    height: 201px;
-    background: #fff;
-    border-radius: 8px;
 }

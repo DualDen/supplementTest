@@ -1,0 +1,119 @@
+.modalOverlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    position: fixed;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+}
+.modalOverlay.hide{
+    display: none;
+}
+.modalContainer{
+    width: 679px;
+    height: 201px;
+    background: #fff;
+    border-radius: 8px;
+}
+.modalImg{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 16px;
+}
+.modalTitle{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0,0,0,.16);
+    padding: 0px 12px 0px 16px;
+    height: 48px;
+}
+.modalTitleLeft{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}.modalTitleRight{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+.modalTitleLeftText{
+    font-weight: 700;
+}
+.modalSelects{
+    display: flex;
+    padding: 16px 16px 24px 21px;
+}
+.selectContainer{
+    margin-right: 16px;
+}
+.selectContainer:last-child{
+    margin-right: 0;
+}
+.selectTitle{
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+.frequenciesSelects{
+    width: 204px;
+}
+.timesPerDaySelects{
+    width: 118px;
+}
+.doseSelects{
+    width: 145px;
+}
+select{
+    width: 100%;
+    height: 100%;
+    padding: 14px 12px;
+    border-radius: 8px;
+    border-color: rgba(0,0,0,.16);
+    appearance: none;
+    background: url(../../../assets/images/downarrow.svg)  right 10px bottom 17px no-repeat;
+    cursor: pointer;
+}
+select:after{
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 7px;
+}
+select:focus{
+    outline: none;
+}
+input{
+    padding: 14px 6px 14px 16px;
+    width: 50px;
+    border: 1px solid rgba(0,0,0,.16);
+    border-radius: 8px;
+    cursor: pointer;
+
+}
+.addToCourseBtnContainer{
+    width: 100%;
+    text-align: right;
+}
+.addToCourseBtn{
+    padding: 8px 16px;
+    color: #2662C9;
+    border: 2px solid #2662C9;
+    background: #fff;
+    border-radius: 40px;
+    margin-right: 57px;
+    transition: .3s;
+    cursor: pointer;
+}
+.addToCourseBtn:hover{
+    background: #2662C9;
+    color: #fff;
+}

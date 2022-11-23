@@ -5,15 +5,17 @@ import {useEffect,useState} from 'react';
 import MedicationsContainer from './components/Medications/MedicationsContainer';
 import Nav from "./components/Navbar/Nav";
 import Course from "./components/Course/Course";
+import CourseContainer from "./components/Course/CourseContainer";
+import NavContainer from "./components/Navbar/NavContainer";
 
 function App() {
  
 
   return (
     <div className="App">
-        <Nav/>
+        <NavContainer/>
       <MedicationsContainer/>
-        <Course/>
+        <CourseContainer/>
     </div>
   );
 }
