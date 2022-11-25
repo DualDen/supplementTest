@@ -105,9 +105,15 @@ transform: rotate(0);
     border-radius: 8px;
     margin-bottom: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.16);
+    transition: .3s;
+
+}
+.courseLargeItem.active{
     padding-bottom: 21px;
 }
+
 .courseLargeItemTitle{
+    cursor: pointer;
     display: flex;
     align-items: center;
     padding: 12px 0;
@@ -181,11 +187,12 @@ transform: rotate(0);
     margin-left: 21px;
     cursor: pointer;
 }
-.supplementFacts{
+.courseLargeItem .supplementFacts{
+    display: none;
     justify-content: flex-end;
-    display: flex;
     align-items: center;
     padding-right: 24px;
+    margin-top: 21px;
 }
 .supplementFacts span{
     margin-left: 23px;
@@ -210,9 +217,21 @@ transform: rotate(0);
 .courseLargeItemBioContent{
     display: flex;
     padding-left: 16px;
-    padding-top: 16px;
     align-items: center;
+    height: 0;
+    overflow: hidden;
+    transition: .6s;
 }
+.courseLargeItem.active .courseLargeItemBioContent{
+    padding-top: 16px;
+    overflow: visible;
+    transition: .6s;
+}
+
+.courseLargeItem.active .courseLargeItemBioContent{
+    height: 80px;
+}
+
 .courseLargeBy{
     display: flex;
     text-transform: uppercase;
@@ -222,11 +241,24 @@ transform: rotate(0);
     padding: 14px 39px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.16);
     color: rgba(0, 0, 0, 0.72);
-    transition: .3s;
+    transition: .10s;
     cursor: pointer;
 }
 .courseLargeByItem.active{
     color: #000;
     font-weight: 500;
     border-bottom: 1px solid #2662C9;
+}
+.courseLargeItemContent{
+    height: 0;
+    transition: .6s;
+    overflow: hidden;
+}
+.courseLargeItem.active .courseLargeItemContent{
+    height: 400px;
+    transition: .6s;
+    overflow: auto;
+}
+.courseLargeItem.active .supplementFacts{
+    display: flex;
 }

@@ -29,8 +29,10 @@ const Course = (props) => {
          </div>
 
             {props.showMore ? <CourseLarge
+                setBioIsOpened={props.setBioIsOpened}
                 removeCourseItemTimesItem={props.removeCourseItemTimesItem}
                 removeCourseItemTimes={props.removeCourseItemTimes}
+                setTimesIsOpened={props.setTimesIsOpened}
                 times={props.times} courseMedications={props.courseMedications}/> : <CourseShort courseMedications={props.courseMedications}/>}
         </div>
     );

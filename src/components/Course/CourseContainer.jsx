@@ -1,6 +1,11 @@
 import {connect} from "react-redux";
 import Course from "./Course";
-import {removeCourseItemTimes, removeCourseItemTimesItem, setShowMore} from "../../Redux/medications-reducer";
+import {
+    removeCourseItemTimes,
+    removeCourseItemTimesItem, setBioIsOpened,
+    setShowMore,
+    setTimesIsOpened
+} from "../../Redux/medications-reducer";
 
 let mapStateToProps = (state) => {
     return {
@@ -20,6 +25,12 @@ let mapDispatchToProps = (dispatch) => {
         },
         removeCourseItemTimesItem: (time,article) => {
             dispatch(removeCourseItemTimesItem(time,article))
+        },
+        setTimesIsOpened: (time) => {
+            dispatch(setTimesIsOpened(time))
+        },
+        setBioIsOpened: (name) => {
+            dispatch(setBioIsOpened(name));
         }
     }
 }

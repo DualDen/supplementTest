@@ -8,7 +8,7 @@ import {
     setFrequencies,
     setTimesPerDay,
     setDose,
-    addCourseMedications, setIsAdded, setTimes
+    addCourseMedications, setIsAdded, setTimes, setAdditionalTimeAndDose
 } from "../../Redux/medications-reducer";
 import Medications from './Medications';
 
@@ -57,6 +57,9 @@ let mapDispatchToProps = (dispatch) => {
         },
         setTimes: (times) => {
             dispatch(setTimes(times));
+        },
+        setAdditionalTimeAndDose: (name,time,dose) => {
+            dispatch(setAdditionalTimeAndDose(name,time,dose));
         }
     };
 }

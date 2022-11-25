@@ -34,6 +34,7 @@ let Medications = (props) => {
 
         <div className='medicationsContainer' id='medicationsContainer'>
             <Modal
+                setAdditionalTimeAndDose={props.setAdditionalTimeAndDose}
                 courseMedications={props.courseMedications}
                 setTimes={props.setTimes}
                 setIsAdded={props.setIsAdded}

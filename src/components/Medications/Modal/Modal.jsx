@@ -78,11 +78,13 @@ const Modal = (props) => {
                 <div className='addToCourseBtnContainer'>
                 <button onClick={() => {
                     props.setTimes({frequencies: props.selects.frequencies, timesPerDay: props.selects.timesPerDay, time:props.selects.time,
-                    dose: props.selects.dose, GoodsCommercialName: props.modal.GoodsCommercialName,Picture: props.modal.Picture, Article: props.modal.Article
+                    dose: props.selects.dose, GoodsCommercialName: props.modal.GoodsCommercialName,Picture: props.modal.Picture, Article: props.modal.Article,
+                        isOpened: false,
                     });
                     props.addCourseMedications(props.selects,props.modal.GoodsCommercialName, props.modal.Picture,props.modal.Article);
                     props.setIsOpened(false);
                     props.setIsAdded(props.modal.Article);
+                    props.setAdditionalTimeAndDose(props.modal.GoodsCommercialName, props.selects.time,props.selects.dose)
                 }} className='addToCourseBtn'>Добавить в курс</button>
                 </div>
 
