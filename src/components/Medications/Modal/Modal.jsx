@@ -77,22 +77,21 @@ const Modal = (props) => {
                 </div>
                 <div className='addToCourseBtnContainer'>
                 <button onClick={() => {
-                    let filteredTimes = Object.entries(props.times).map(o => o[1].filter(c => c.GoodsCommercialName === props.modal.GoodsCommercialName && c.time === props.selects.time));
+                    let filteredTimes = Object.entries(props.times).map(o => o[1].filter(c => c.GoodsCommercialName === props.modal.GoodsCommercialName ));
                     if (Object.entries(props.times).length === 0) {
                         props.setTimes({frequencies: props.selects.frequencies, timesPerDay: props.selects.timesPerDay, time:props.selects.time,
                             dose: props.selects.dose, GoodsCommercialName: props.modal.GoodsCommercialName,Picture: props.modal.Picture, Article: props.modal.Article,
-                            isOpened: false,
+                            isOpened: false, additionalTimeAndDose: []
                         });
                     }
                     else if(filteredTimes[0].length === 0 && (typeof filteredTimes[1] === 'undefined' || filteredTimes[1].length === 0)) {
                         props.setTimes({frequencies: props.selects.frequencies, timesPerDay: props.selects.timesPerDay, time:props.selects.time,
                             dose: props.selects.dose, GoodsCommercialName: props.modal.GoodsCommercialName,Picture: props.modal.Picture, Article: props.modal.Article,
-                            isOpened: false,
+                            isOpened: false, additionalTimeAndDose: []
                         });
                     }
-                    let filteredCm = props.courseMedications.filter(a => a.GoodsCommercialName === props.modal.GoodsCommercialName);
-                    if(filteredCm.length === 0) {
-                        props.addCourseMedications(props.selects,props.modal.GoodsCommercialName, props.modal.Picture,props.modal.Article);
+                    else if(filteredTimes[0].length > 0){
+                        props.setAdditionalTimeAndDose(props.selects.time,props.selects.dose,props.modal.GoodsCommercialName)
                     }
                     props.setIsOpened(false);
                     props.setIsAdded(props.modal.Article);

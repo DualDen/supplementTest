@@ -208,6 +208,10 @@ transform: rotate(0);
     background: rgba(0,0,0,0.3);
 }
 .courseLargeItemIconSvg{
+    transform: rotate(0deg);
+    transition: .3s
+}
+.courseLargeItem.active .courseLargeItemIconSvg{
     transform: rotate(180deg);
 }
 .courseLargeItemName{
@@ -215,7 +219,7 @@ transform: rotate(0);
     width: 100%;
 }
 .courseLargeItemBioContent{
-    display: flex;
+    display: block;
     padding-left: 16px;
     align-items: center;
     max-height: 0;
@@ -261,4 +265,15 @@ transform: rotate(0);
 }
 .courseLargeItem.active .supplementFacts{
     display: flex;
+}
+.courseLargeItemBioSelects{
+    display: flex;
+    align-items: center;
+}
+.courseLargeItemBioAdSelects{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 20px;
+    padding-right: 22px;
 }

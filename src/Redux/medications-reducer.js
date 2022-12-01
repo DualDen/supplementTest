@@ -1,4 +1,3 @@
-import medications from "../components/Medications/Medications";
 
 let initialState = {
     medications: [],
@@ -16,7 +15,6 @@ let initialState = {
         dose: '1',
 
     },
-    courseMedications: [],
     showMore: false,
     times: {
 
@@ -24,7 +22,6 @@ let initialState = {
     },
     purpose: "",
     sort: "",
-    closeAll: 0,
 };
 
 const medicationsReducer = (state = initialState, action) => {
@@ -69,13 +66,6 @@ const medicationsReducer = (state = initialState, action) => {
                 selects: {...state.selects,
                     dose: action.dose,}
             }
-        case ADD_COURSE_MEDICATIONS:
-            return {
-                ...state,
-                courseMedications: [...state.courseMedications,{GoodsCommercialName: action.title, Picture: action.img, frequencies: action.courseMedications.frequencies,
-                timesPerDay: action.courseMedications.timesPerDay, time: action.courseMedications.time, dose: action.courseMedications.dose,Article: action.article
-                }]
-            }
         case SET_IS_ADDED:
             return {
                 ...state,
@@ -104,7 +94,7 @@ const medicationsReducer = (state = initialState, action) => {
             }
             return{
                 ...state,
-                times: state.times
+                times: {...state.times}
             }
         case REMOVE_COURSE_ITEM_TIMES:
             let newTimes = {...state.times};
@@ -120,7 +110,6 @@ const medicationsReducer = (state = initialState, action) => {
          return {
             ...state,
              times: newTimes,
-             courseMedications: [...state.courseMedications].filter(e => e.time != action.time),
              medications: medicationsCopy,
 
          }
@@ -131,16 +120,9 @@ const medicationsReducer = (state = initialState, action) => {
                     newTimesItem[action.time].splice(index,1);
                 }
             })
-            let courseMedicationsCopy = [...state.courseMedications];
-            courseMedicationsCopy.map((el,index) => {
-                if(el.Article === action.article) {
-                    courseMedicationsCopy.splice(index,1);
-                }
-            })
             return {
                 ...state,
                 times: newTimesItem,
-                courseMedications: courseMedicationsCopy,
                 medications: state.medications.map(m => {
                     if (m.Article === action.article) {
                         return {
@@ -183,6 +165,47 @@ const medicationsReducer = (state = initialState, action) => {
                 ...state,
                 times: {...state.times}
             }
+        case SET_ADDITIONAL_TIME_AND_DOSE:
+            Object.entries(state.times).map(o => {
+                return o[1].map(m => {
+                    if(m.GoodsCommercialName === action.name) {
+                        m.additionalTimeAndDose.push({time: action.time,dose:action.dose,id:Math.random().toString(16).slice(2) });
+                    }
+                })
+            })
+            return{
+                ...state,
+                times: {...state.times}
+            }
+        case REMOVE_ADDITIONAL_TIME_AND_DOSE:
+            Object.entries(state.times).map(o => {
+                return o[1].map((m) => {
+                    return m.additionalTimeAndDose.map((i,index) => {
+                        if (i.id === action.id) {
+                            m.additionalTimeAndDose.splice(index,1);
+                        }
+
+                    })
+                })
+            })
+            return{
+                ...state,
+                times: {...state.times}
+            }
+        case REMOVE_FIRST_ADT:
+            Object.entries(state.times).map(o => {
+                return o[1].map((m) => {
+                    m.dose = m.additionalTimeAndDose[0].dose;
+                    m.time = m.additionalTimeAndDose[0].time;
+                    m.additionalTimeAndDose.splice(0,1);
+                })
+            })
+            return{
+                ...state,
+                times: {...state.times}
+            }
+
+
 
 
 
@@ -192,6 +215,9 @@ const medicationsReducer = (state = initialState, action) => {
 
 
 }
+let REMOVE_FIRST_ADT = "REMOVE_FIRST_ADT";
+let REMOVE_ADDITIONAL_TIME_AND_DOSE = "REMOVE_ADDITIONAL_TIME_AND_DOSE";
+let SET_ADDITIONAL_TIME_AND_DOSE = "SET_ADDITIONAL_TIME_AND_DOSE"
 let CLOSE_ALL = "CLOSE_ALL"
 let SET_SORT = "SET_SORT";
 let SET_PURPOSE = "SET_PURPOSE";
@@ -201,7 +227,6 @@ let REMOVE_COURSE_ITEM_TIMES = "REMOVE_COURSE_ITEM_TIMES";
 let SET_TIMES = "SET_TIMES";
 let SET_SHOW_MORE = "SET_SHOW_MORE";
 let SET_IS_ADDED = "SET_IS_ADDED";
-let ADD_COURSE_MEDICATIONS = 'ADD_COURSE_MEDICATIONS';
 let DOSE = "DOSE";
 let TIMES_PER_DAY = "TIMES_PER_DAY";
 let SET_FREQUENCIES = 'SET_FREQUENCIES'
@@ -210,6 +235,9 @@ let SET_IS_OPENED = 'SET_IS_OPENED';
 let TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 let SET_MEDICATIONS = "SET_MEDICATIONS";
 let SET_MODAL = "SET_MODAL";
+export let removeFirstAdt = (time) => ({type: REMOVE_FIRST_ADT,time});
+export let removeAdditionalTimeAndDose = (id) => ({type: REMOVE_ADDITIONAL_TIME_AND_DOSE,id});
+export let setAdditionalTimeAndDose = (time,dose,name) => ({type: SET_ADDITIONAL_TIME_AND_DOSE, time ,dose,name})
 export let closeAll = (close) => ({type: CLOSE_ALL,close})
 export let setSort = (sort) => ({type: SET_SORT, sort});
 export let setPurpose = (purpose) => ({type: SET_PURPOSE,purpose})
@@ -218,7 +246,6 @@ export let removeCourseItemTimes = (time) => ({type: REMOVE_COURSE_ITEM_TIMES, t
 export let setTimes = (times) => ({type: SET_TIMES, times});
 export let setShowMore = (showMore) => ({type: SET_SHOW_MORE, showMore})
 export let setIsAdded = (id) => ({type: SET_IS_ADDED, id});
-export let addCourseMedications = (courseMedications, title, img,article) => ({type: ADD_COURSE_MEDICATIONS, courseMedications, title, img,article});
 export let setFrequencies = (frequencies) => ({type: SET_FREQUENCIES, frequencies})
 export let setTimesPerDay = (timesPerDay) => ({type: TIMES_PER_DAY, timesPerDay})
 export let setDose = (dose) => ({type: DOSE, dose})

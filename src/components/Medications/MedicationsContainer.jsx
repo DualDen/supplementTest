@@ -7,8 +7,7 @@ import {
     setTime,
     setFrequencies,
     setTimesPerDay,
-    setDose,
-    addCourseMedications, setIsAdded, setTimes, setSort,
+    setDose, setIsAdded, setTimes, setSort, setAdditionalTimeAndDose,
 } from "../../Redux/medications-reducer";
 import Medications from './Medications';
 
@@ -19,7 +18,6 @@ let mapStateToProps = (state) => {
         modal: state.medicationsReducer.modal,
         isOpened: state.medicationsReducer.isOpened,
         selects: state.medicationsReducer.selects,
-        courseMedications: state.medicationsReducer.courseMedications,
         times: state.medicationsReducer.times,
         purpose: state.medicationsReducer.purpose,
         sort: state.medicationsReducer.sort,
@@ -52,9 +50,6 @@ let mapDispatchToProps = (dispatch) => {
         setDose: (dose) => {
             dispatch(setDose(dose));
         },
-        addCourseMedications: (courseMedications, title, img,article) => {
-            dispatch(addCourseMedications(courseMedications, title, img,article));
-        },
         setIsAdded: (id) => {
             dispatch(setIsAdded(id));
         },
@@ -63,6 +58,9 @@ let mapDispatchToProps = (dispatch) => {
         },
         setSort: (sort) => {
             dispatch(setSort(sort));
+        },
+        setAdditionalTimeAndDose: (time,dose,name) => {
+            dispatch(setAdditionalTimeAndDose(time,dose,name));
         }
     };
 }

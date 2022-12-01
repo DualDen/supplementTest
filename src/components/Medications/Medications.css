@@ -6,12 +6,37 @@
 .filters{
     display: flex;
     margin-bottom: 20px;
+    align-items: center;
+}
+.filtersItem{
+    cursor: pointer;
 }
 .filtersItem.first{
 margin-right: 212px;
+    display: flex;
+    align-items: center;
+}
+.filtersItemSvg{
+    margin-left: 7px;
+    transform: rotateX(0);
+    transition: .3s;
+}
+.filtersItemSvg svg path{
+    fill: rgba(0, 0, 0, 0.16);
+}
+.filtersItemSvg.active svg path{
+    fill: #2662C9;
+}
+.filtersItemSvg.rotated{
+    transform: rotateX(180deg);
 }
 .filtersItem.second{
     margin-right: 256px;
+    cursor: initial;
+}
+.filtersItem.third{
+    display: flex;
+    align-items: center;
 }
 .medications{
     overflow: auto;

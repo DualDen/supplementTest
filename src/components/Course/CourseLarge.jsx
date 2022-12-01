@@ -9,7 +9,7 @@ const CourseLarge = (props) => {
     return (
         <div>
             {
-               props.courseMedications.length === 0 ? <CourseDescription/> :
+               Object.entries(props.times).length === 0 ? <CourseDescription/> :
                    <div className='courseLargeBy'>
                        <div onClick={() => {setBy('time')}} className={by === 'time' ? "courseLargeByItem active" : "courseLargeByItem"}>По времени приёма</div>
                        <div onClick={() => {setBy('bio')}} className={by === 'bio' ? "courseLargeByItem active" : "courseLargeByItem"}>По биодобавке</div>
@@ -22,6 +22,8 @@ const CourseLarge = (props) => {
                 removeCourseItemTimes={props.removeCourseItemTimes}
                 times={props.times}/> :
             <CourseLargeByBio
+                removeFirstAdt={props.removeFirstAdt}
+                removeAdditionalTimeAndDose={props.removeAdditionalTimeAndDose}
                 setTimesIsOpened={props.setTimesIsOpened}
                 removeCourseItemTimesItem={props.removeCourseItemTimesItem}
                 times={props.times} removeCourseItemTimes={props.removeCourseItemTimes}

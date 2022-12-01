@@ -30,11 +30,13 @@ const Course = (props) => {
          </div>
 
             {props.showMore ? <CourseLarge
+                removeFirstAdt={props.removeFirstAdt}
+                removeAdditionalTimeAndDose={props.removeAdditionalTimeAndDose}
                 setBioIsOpened={props.setBioIsOpened}
                 removeCourseItemTimesItem={props.removeCourseItemTimesItem}
                 removeCourseItemTimes={props.removeCourseItemTimes}
                 setTimesIsOpened={props.setTimesIsOpened}
-                times={props.times} courseMedications={props.courseMedications}/> : <CourseShort courseMedications={props.courseMedications}/>}
+                times={props.times}/> : <CourseShort times={props.times}/>}
         </div>
     );
 };

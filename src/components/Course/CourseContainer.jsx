@@ -1,9 +1,9 @@
 import {connect} from "react-redux";
 import Course from "./Course";
 import {
-    closeAll,
+    closeAll, removeAdditionalTimeAndDose,
     removeCourseItemTimes,
-    removeCourseItemTimesItem,
+    removeCourseItemTimesItem, removeFirstAdt,
     setShowMore,
     setTimesIsOpened
 } from "../../Redux/medications-reducer";
@@ -32,6 +32,12 @@ let mapDispatchToProps = (dispatch) => {
         },
         closeAll: (close) => {
             dispatch(closeAll(close));
+        },
+        removeAdditionalTimeAndDose: (id) => {
+            dispatch(removeAdditionalTimeAndDose(id));
+        },
+        removeFirstAdt: (time) => {
+            dispatch(removeFirstAdt(time));
         }
     }
 }
