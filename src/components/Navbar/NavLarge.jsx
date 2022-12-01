@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NavLarge = () => {
+const NavLarge = (props) => {
     return (
         <div>
             <div className="logoBlock">
@@ -32,21 +32,21 @@ const NavLarge = () => {
                 </div>
             </div>
             <div className='navBlock active'>
-                <p>Каталог</p>
+                <p onClick={() => {props.setPurpose('')}}>Каталог</p>
                 <ul className='navList'>
-                    <li className="navList__item">Anti-age</li>
-                    <li className="navList__item">Антистресс</li>
-                    <li className="navList__item">Антиоксиданты</li>
-                    <li className="navList__item">Женское здоровье</li>
-                    <li className="navList__item">Здоровый сон</li>
-                    <li className="navList__item">Кожа, волосы, ногти</li>
-                    <li className="navList__item">Крепкий иммунитет</li>
-                    <li className="navList__item">Мужское здоровье</li>
-                    <li className="navList__item">Омега, жирные кислоты</li>
-                    <li className="navList__item">Память и внимание</li>
-                    <li className="navList__item">Похудение и стройность</li>
-                    <li className="navList__item">Спокойствие и фокус</li>
-                    <li className="navList__item">Суставы и связки</li>
+                    <li onClick={() => {props.setPurpose("Anti-age")}} className={props.purpose === 'Anti-age' ? "navList__item active" : "navList__item"}>Anti-age</li>
+                    <li onClick={() => {props.setPurpose("Антистресс")}} className={props.purpose === 'Антистресс' ? "navList__item active" : "navList__item"}>Антистресс</li>
+                    <li onClick={() => {props.setPurpose("Антиоксиданты")}} className={props.purpose === 'Антиоксиданты' ? "navList__item active" : "navList__item"}>Антиоксиданты</li>
+                    <li onClick={() => {props.setPurpose("Женское здоровье")}} className={props.purpose === 'Женское здоровье' ? "navList__item active" : "navList__item"}>Женское здоровье</li>
+                    <li onClick={() => {props.setPurpose("Здоровый сон")}} className={props.purpose === 'Здоровый сон' ? "navList__item active" : "navList__item"}>Здоровый сон</li>
+                    <li onClick={() => {props.setPurpose("Кожа, волосы, ногти")}} className={props.purpose === 'Кожа, волосы, ногти' ? "navList__item active" : "navList__item"}>Кожа, волосы, ногти</li>
+                    <li onClick={() => {props.setPurpose("Крепкий иммунитет")}} className={props.purpose === 'Крепкий иммунитет' ? "navList__item active" : "navList__item"}>Крепкий иммунитет</li>
+                    <li onClick={() => {props.setPurpose("Мужское здоровье")}} className={props.purpose === 'Мужское здоровье' ? "navList__item active" : "navList__item"}>Мужское здоровье</li>
+                    <li onClick={() => {props.setPurpose("Омега, жирные кислоты")}} className={props.purpose === 'Омега, жирные кислоты' ? "navList__item active" : "navList__item"}>Омега, жирные кислоты</li>
+                    <li onClick={() => {props.setPurpose("Память и внимание")}} className={props.purpose === 'Память и внимание' ? "navList__item active" : "navList__item"}>Память и внимание</li>
+                    <li onClick={() => {props.setPurpose("Похудение и стройность")}} className={props.purpose === 'Похудение и стройность' ? "navList__item active" : "navList__item"}>Похудение и стройность</li>
+                    <li onClick={() => {props.setPurpose("Спокойствие и фокус")}} className={props.purpose === 'Спокойствие и фокус' ? "navList__item active" : "navList__item"}>Спокойствие и фокус</li>
+                    <li onClick={() => {props.setPurpose("Суставы и связки")}} className={props.purpose === 'Суставы и связки' ? "navList__item active" : "navList__item"}>Суставы и связки</li>
                 </ul>
             </div>
             <div className='navBlock'>

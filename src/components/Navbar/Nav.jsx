@@ -6,7 +6,9 @@ import NavShort from "./NavShort";
 const Nav = (props) => {
     return (
         <div className={props.showMore ? 'navContainer short' : "navContainer"}>
-            {props.showMore ? <NavShort medications={props.medications}/> : <NavLarge medications={props.medications}/>}
+            {props.showMore ?
+                <NavShort purpose={props.purpose} setPurpose={props.setPurpose} medications={props.medications}/> :
+                <NavLarge purpose={props.purpose} setPurpose={props.setPurpose} medications={props.medications}/>}
         </div>
     );
 };

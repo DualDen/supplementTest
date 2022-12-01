@@ -7,8 +7,10 @@ const CourseLargeByTime = (props) => {
                 Object.entries(props.times).sort().map(o => {
                     return (
                         <div key={o[0]} className={o[1][0].isOpened ? "courseLargeItem active" : 'courseLargeItem'}>
-                            <div onClick={() => {
-                                props.setTimesIsOpened(o[0]);
+                            <div onClick={(e) => {
+                                if(e.target.tagName === "DIV") {
+                                    props.setTimesIsOpened(o[0],o[1][0].GoodsCommercialName);
+                                }
                             }} className='courseLargeItemTitle'>
                                 <div className='courseLargeItemIcon'>
                                     <svg className='courseLargeItemIconSvg' width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -218,7 +218,7 @@ transform: rotate(0);
     display: flex;
     padding-left: 16px;
     align-items: center;
-    height: 0;
+    max-height: 0;
     overflow: hidden;
     transition: .6s;
 }
@@ -229,7 +229,7 @@ transform: rotate(0);
 }
 
 .courseLargeItem.active .courseLargeItemBioContent{
-    height: 80px;
+    max-height: initial;
 }
 
 .courseLargeBy{
@@ -250,12 +250,12 @@ transform: rotate(0);
     border-bottom: 1px solid #2662C9;
 }
 .courseLargeItemContent{
-    height: 0;
+    max-height: 0;
     transition: .6s;
     overflow: hidden;
 }
 .courseLargeItem.active .courseLargeItemContent{
-    height: 400px;
+    max-height: initial;
     transition: .6s;
     overflow: auto;
 }

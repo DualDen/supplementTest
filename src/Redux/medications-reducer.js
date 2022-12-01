@@ -21,7 +21,10 @@ let initialState = {
     times: {
 
 
-    }
+    },
+    purpose: "",
+    sort: "",
+    closeAll: 0,
 };
 
 const medicationsReducer = (state = initialState, action) => {
@@ -150,38 +153,37 @@ const medicationsReducer = (state = initialState, action) => {
         case SET_TIMES_IS_OPENED:
             let timesCopy = {...state.times};
             timesCopy[action.time].map(t => {
-                if(t.time === action.time) {
+                if(t.GoodsCommercialName === action.name) {
                     t.isOpened === true ? t.isOpened = false : t.isOpened = true;
                 }
+
 
             })
             return {
                 ...state,
                 times: timesCopy,
             }
-        case SET_BIO_IS_OPENED:
+        case SET_PURPOSE:
             return {
                 ...state,
-                courseMedications: [...state.courseMedications].map(b => {
-                    if(b.GoodsCommercialName === action.name) {
-                        b.isOpened === true ? b.isOpened = false : b.isOpened = true;
-                    }
-                    return b;
-                })
+                purpose: action.purpose,
             }
-        case SET_ADDITIONAL_TIME_AND_DOSE:
-          return {
-              ...state,
-              courseMedications: [...state.courseMedications].map(c => {
-                  if(c.GoodsCommercialName === action.name) {
-                      return {
-                          c
-                      }
-                  }
-                  return c;
-              })
+        case SET_SORT:
+            return{
+                ...state,
+                sort: action.sort,
+            }
+        case CLOSE_ALL:
+            Object.entries(state.times).map(o => {
+                return o[1].map(m => {
+                    m.isOpened = false
+                })
+            })
+            return{
+                ...state,
+                times: {...state.times}
+            }
 
-        }
 
 
         default:
@@ -190,8 +192,9 @@ const medicationsReducer = (state = initialState, action) => {
 
 
 }
-let SET_ADDITIONAL_TIME_AND_DOSE = 'SET_ADDITIONAL_TIME_AND_DOSE';
-let SET_BIO_IS_OPENED = "SET_BIO_IS_OPENED";
+let CLOSE_ALL = "CLOSE_ALL"
+let SET_SORT = "SET_SORT";
+let SET_PURPOSE = "SET_PURPOSE";
 let SET_TIMES_IS_OPENED = "SET_TIMES_IS_OPENED";
 let REMOVE_COURSE_ITEM_TIMES_ITEM = 'REMOVE_COURSE_ITEM_TIMES_ITEM';
 let REMOVE_COURSE_ITEM_TIMES = "REMOVE_COURSE_ITEM_TIMES";
@@ -207,8 +210,9 @@ let SET_IS_OPENED = 'SET_IS_OPENED';
 let TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 let SET_MEDICATIONS = "SET_MEDICATIONS";
 let SET_MODAL = "SET_MODAL";
-export let setAdditionalTimeAndDose = (name,time,dose) => ({type: SET_ADDITIONAL_TIME_AND_DOSE, name,time,dose});
-export let setBioIsOpened = (name) => ({type: SET_BIO_IS_OPENED,name})
+export let closeAll = (close) => ({type: CLOSE_ALL,close})
+export let setSort = (sort) => ({type: SET_SORT, sort});
+export let setPurpose = (purpose) => ({type: SET_PURPOSE,purpose})
 export let removeCourseItemTimesItem = (time,article) => ({type: REMOVE_COURSE_ITEM_TIMES_ITEM,time,article});
 export let removeCourseItemTimes = (time) => ({type: REMOVE_COURSE_ITEM_TIMES, time});
 export let setTimes = (times) => ({type: SET_TIMES, times});
@@ -223,7 +227,7 @@ export let setIsOpened = (isOpened) => ({type: SET_IS_OPENED, isOpened})
 export let setMedications = (medications) => ({type: SET_MEDICATIONS, medications});
 export let toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export let setModal = (modal) => ({type: SET_MODAL, modal});
-export let setTimesIsOpened = (time) => ({type: SET_TIMES_IS_OPENED,time})
+export let setTimesIsOpened = (time,name) => ({type: SET_TIMES_IS_OPENED,time,name})
 
 export default medicationsReducer;
 

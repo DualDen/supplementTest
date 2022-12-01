@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./Course.css";
 import CourseShort from "./CourseShort";
 import CourseLarge from "./CourseLarge";
 import {removeCourseItemTimesItem} from "../../Redux/medications-reducer";
 
 const Course = (props) => {
+
     return (
         <div className={props.showMore ? "courseContainer large" : 'courseContainer'}>
          <div className='courseTitle'>
@@ -24,7 +25,7 @@ const Course = (props) => {
                      <option value="1">4 недели</option>
 
                  </select>
-                 <button className='courseTitleSelectButton'>Свернуть все</button>
+                 <button onClick={() => {props.closeAll()}} className='courseTitleSelectButton'>Свернуть все</button>
              </div>
          </div>
 

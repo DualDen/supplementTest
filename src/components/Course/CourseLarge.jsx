@@ -22,9 +22,10 @@ const CourseLarge = (props) => {
                 removeCourseItemTimes={props.removeCourseItemTimes}
                 times={props.times}/> :
             <CourseLargeByBio
+                setTimesIsOpened={props.setTimesIsOpened}
                 removeCourseItemTimesItem={props.removeCourseItemTimesItem}
-                times={props.times} removeCourseItemTimes={props.removeCourseItemTimes} courseMedications={props.courseMedications}
-                setBioIsOpened={props.setBioIsOpened}/>
+                times={props.times} removeCourseItemTimes={props.removeCourseItemTimes}
+                />
             }
 
         </div>

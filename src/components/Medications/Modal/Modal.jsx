@@ -77,14 +77,25 @@ const Modal = (props) => {
                 </div>
                 <div className='addToCourseBtnContainer'>
                 <button onClick={() => {
-                    props.setTimes({frequencies: props.selects.frequencies, timesPerDay: props.selects.timesPerDay, time:props.selects.time,
-                    dose: props.selects.dose, GoodsCommercialName: props.modal.GoodsCommercialName,Picture: props.modal.Picture, Article: props.modal.Article,
-                        isOpened: false,
-                    });
-                    props.addCourseMedications(props.selects,props.modal.GoodsCommercialName, props.modal.Picture,props.modal.Article);
+                    let filteredTimes = Object.entries(props.times).map(o => o[1].filter(c => c.GoodsCommercialName === props.modal.GoodsCommercialName && c.time === props.selects.time));
+                    if (Object.entries(props.times).length === 0) {
+                        props.setTimes({frequencies: props.selects.frequencies, timesPerDay: props.selects.timesPerDay, time:props.selects.time,
+                            dose: props.selects.dose, GoodsCommercialName: props.modal.GoodsCommercialName,Picture: props.modal.Picture, Article: props.modal.Article,
+                            isOpened: false,
+                        });
+                    }
+                    else if(filteredTimes[0].length === 0 && (typeof filteredTimes[1] === 'undefined' || filteredTimes[1].length === 0)) {
+                        props.setTimes({frequencies: props.selects.frequencies, timesPerDay: props.selects.timesPerDay, time:props.selects.time,
+                            dose: props.selects.dose, GoodsCommercialName: props.modal.GoodsCommercialName,Picture: props.modal.Picture, Article: props.modal.Article,
+                            isOpened: false,
+                        });
+                    }
+                    let filteredCm = props.courseMedications.filter(a => a.GoodsCommercialName === props.modal.GoodsCommercialName);
+                    if(filteredCm.length === 0) {
+                        props.addCourseMedications(props.selects,props.modal.GoodsCommercialName, props.modal.Picture,props.modal.Article);
+                    }
                     props.setIsOpened(false);
                     props.setIsAdded(props.modal.Article);
-                    props.setAdditionalTimeAndDose(props.modal.GoodsCommercialName, props.selects.time,props.selects.dose)
                 }} className='addToCourseBtn'>Добавить в курс</button>
                 </div>
 

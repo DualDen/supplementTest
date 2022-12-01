@@ -28,13 +28,25 @@ let Medications = (props) => {
         let appContainer = document.querySelector('.App');
         appContainer.insertAdjacentElement('afterbegin',modal);
     }
+    let compareFunc = (a,b) => {
+        switch(props.sort) {
+            case 'bioMin':
+                return b.GoodsCommercialName.localeCompare(a.GoodsCommercialName);
+            case 'bioMax':
+                return a.GoodsCommercialName.localeCompare(b.GoodsCommercialName);
+            case 'priceMin':
+                return b.CurrentPrices - a.CurrentPrices;
+            case 'priceMax':
+                return a.CurrentPrices - b.CurrentPrices;
+        }
+    }
 
 
     return (
 
         <div className='medicationsContainer' id='medicationsContainer'>
             <Modal
-                setAdditionalTimeAndDose={props.setAdditionalTimeAndDose}
+                times={props.times}
                 courseMedications={props.courseMedications}
                 setTimes={props.setTimes}
                 setIsAdded={props.setIsAdded}
@@ -44,12 +56,19 @@ let Medications = (props) => {
                 setDose={props.setDose} setTimesPerDay={props.setTimesPerDay}
             />
            <div className="filters">
-               <div className='filtersItem first'>Биодобавка</div>
+               <div onClick={()=> {
+                   props.sort === "bioMin" ? props.setSort('bioMax') : props.setSort('bioMin');
+               }} className='filtersItem first'>Биодобавка</div>
                <div className='filtersItem second'>Описание</div>
-               <div className='filtersItem third'>Цена за шт.</div>
+               <div onClick={()=> {
+                   props.sort === "priceMin" ? props.setSort('priceMax') : props.setSort('priceMin');
+               }} className='filtersItem third'>Цена за шт.</div>
            </div>
             <div className='medications'>
-                {props.isFetching ? <Loader/> : props.medications.map(m => {
+                {props.isFetching ? <Loader/> : props.medications
+                    .sort(compareFunc)
+                    .filter(f => props.purpose === "" ? f : f.Purposes.findIndex(i => props.purpose === i.Purpose) > -1)
+                    .map(m => {
                     return (
                         <div className='medication' key={m.Article}>
                             <img className='medicationImg' src={m.Picture} alt=""/>
