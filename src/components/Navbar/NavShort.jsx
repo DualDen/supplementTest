@@ -15,10 +15,6 @@ const NavShort = (props) => {
             </div>
             <ul className='navShortList'>
                 <li onClick={() => {
-                    props.setPurpose('')
-                }} className={props.purpose === "" ? 'listItemActive' : ""}>Все
-                </li>
-                <li onClick={() => {
                     props.setPurpose('Anti-age')
                 }} className={props.purpose === "Anti-age" ? 'listItemActive' : ""}>
                     <img src="https://protein.company/upload/svg/Clock.svg" alt=""/>
