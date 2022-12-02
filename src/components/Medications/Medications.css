@@ -5,7 +5,7 @@
 }
 .filters{
     display: flex;
-    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0,0,0,.16);
     align-items: center;
 }
 .filtersItem{
@@ -84,6 +84,7 @@ margin-right: 212px;
 .medicationButton.added{
     background: #2662C9;
     color: #fff;
+    pointer-events: none;
 }
 .medicationButton:hover{
     background: #2662C9;

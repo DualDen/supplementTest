@@ -3,9 +3,6 @@ import "../Medications/Modal/Modal.css"
 import './Course.css'
 
 const CourseLargeByBio = (props) => {
-    let inputCreator = () => {
-
-    }
     return (
         <div className='courseBioContainer'>
             {Object.entries(props.times).map(o => {
@@ -13,10 +10,10 @@ const CourseLargeByBio = (props) => {
                     <div key={o[0]}>
                         {o[1].map(m => {
                             return (
-                                <div key={m.Picture} className={m.isOpened ? 'courseLargeItem active' : 'courseLargeItem'}>
+                                <div key={m.Article} className={m.isOpened ? 'courseLargeItem active' : 'courseLargeItem'}>
                                     <div onClick={(e) => {
                                         if(e.target.tagName === "DIV") {
-                                            props.setTimesIsOpened(m.time,m.GoodsCommercialName);
+                                            props.setTimesIsOpened(m.timeAndDose[0].time,m.GoodsCommercialName);
                                         }
                                     }} className='courseLargeItemTitle'>
                                         <div className='courseLargeItemIcon'>
@@ -30,13 +27,17 @@ const CourseLargeByBio = (props) => {
                                             {m.GoodsCommercialName}
                                         </div>
                                         <div className='courseLargeItemDescription'>
-                                            {`${m.timesPerDay} прием : ${m.time} ${m.dose} шт`}
+                                            {`${m.timesPerDay} ${m.timesPerDay === "1" ? "прием" : m.timesPerDay >=5 ? 'приемов' : "приема"}
+                                             : ${m.timeAndDose[0].time} ${m.timeAndDose[0].dose} шт 
+                                             ${m.timeAndDose.length > 1 ? `${"," + m.timeAndDose[1].time} ${m.timeAndDose[1].dose} шт` : ""}
+                                              ${m.timeAndDose.length > 2 ? `${"," + m.timeAndDose[2].time} ${m.timeAndDose[2].dose} шт` : ""}
+                                             `}
                                         </div>
 
                                         <div onClick={() => {
-                                            props.removeCourseItemTimesItem(m.time,m.Article);
-                                            if(props.times[m.time].length === 0) {
-                                                props.removeCourseItemTimes(m.time);
+                                            props.removeCourseItemTimesItem(m.timeAndDose[0].time,m.Article);
+                                            if(props.times[m.timeAndDose[0].time].length === 0) {
+                                                props.removeCourseItemTimes(m.timeAndDose[0].time);
                                             }
                                         }}  className='courseLargeItemDeleteIcon'>
                                             <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,10 +47,14 @@ const CourseLargeByBio = (props) => {
                                     </div>
                                     <div className='courseLargeItemBioContent'>
                                         <div className='courseLargeItemBioSelects'>
+                                            <div className='courseLargeItemBioSelect'>
                                         <div className='selectContainer'>
                                             <div className='selectTitle'>Как принимать?</div>
                                             <div className='frequenciesSelects'>
-                                                <select defaultValue={m.frequencies}  name="" id="frequencies">
+                                                <select defaultValue={m.frequencies}  name="" id="frequencies"
+                                                onChange={(e) => {
+                                                    props.setCourseFreq(m.GoodsCommercialName,e.currentTarget.value)
+                                                }}>
                                                     <option value="Ежедневно">Ежедневно</option>
                                                     <option value="Еженедельно">Еженедельно</option>
                                                 </select>
@@ -58,7 +63,16 @@ const CourseLargeByBio = (props) => {
                                         <div className='selectContainer'>
                                             <div className="selectTitle">Сколько раз в день</div>
                                             <div className='timesPerDaySelects'>
-                                                <select defaultValue={m.timesPerDay}  name="" id="timesPerDay">
+                                                <select defaultValue={m.timesPerDay}  name="" id="timesPerDay"
+                                                onChange={(e) => {
+                                                    props.setCourseTpd(m.GoodsCommercialName,e.currentTarget.value);
+                                                    for(let i = m.timeAndDose.length; i < m.timesPerDay; i++) {
+                                                        props.setAdditionalTimeAndDose(m.timeAndDose[0].time,m.timeAndDose[0].dose,m.GoodsCommercialName)
+                                                    }
+                                                    if(m.timeAndDose.length > m.timesPerDay) {
+                                                        props.removeAdditionalTimeAndDose(m.timesPerDay)
+                                                    }
+                                                }}>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
@@ -68,55 +82,24 @@ const CourseLargeByBio = (props) => {
                                                 </select>
                                             </div>
                                         </div>
-                                        <div id='input' className='selectContainer'>
-                                            <div className='selectTitle'>Время</div>
-                                            <input defaultValue={
-                                                typeof m.newTime === 'undefined' ?
-                                                    m.time :
-                                                    m.newTime
-                                            } type="text"/>
-                                        </div>
-                                        <div className='selectContainer'>
-                                            <div className='selectTitle'>Дозировка</div>
-                                            <div className="doseSelects">
-                                                <select defaultValue={m.dose}  name="" id="timesPerDay">
-                                                    <option value="1">1 таблетка</option>
-                                                    <option value="2">2 таблетки</option>
-                                                    <option value="3">3 таблетки</option>
-                                                    <option value="4">4 таблетки</option>
-                                                </select>
                                             </div>
-
-                                        </div>
-                                        <div onClick={() => {
-                                            if(m.additionalTimeAndDose.length === 0) {
-                                                props.removeCourseItemTimesItem(m.time, m.Article);
-                                                if (props.times[m.time].length === 0) {
-                                                    props.removeCourseItemTimes(m.time);
-                                                }
-                                            }
-                                            else{
-                                                props.removeFirstAdt(m.additionalTimeAndDose[0].time);
-                                            }
-                                        }} className='courseLargeItemContentItemDelIcon'>
-                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path fillRule="evenodd" clipRule="evenodd" d="M0.292893 0.292893C0.683417 -0.0976311 1.31658 -0.0976311 1.70711 0.292893L7 5.58579L12.2929 0.292893C12.6834 -0.0976311 13.3166 -0.0976311 13.7071 0.292893C14.0976 0.683417 14.0976 1.31658 13.7071 1.70711L8.41421 7L13.7071 12.2929C14.0976 12.6834 14.0976 13.3166 13.7071 13.7071C13.3166 14.0976 12.6834 14.0976 12.2929 13.7071L7 8.41421L1.70711 13.7071C1.31658 14.0976 0.683417 14.0976 0.292893 13.7071C-0.0976311 13.3166 -0.0976311 12.6834 0.292893 12.2929L5.58579 7L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683417 0.292893 0.292893Z" fill="#A61911"/>
-                                            </svg>
-                                        </div>
-
-                                    </div>
-
-                                            {m.additionalTimeAndDose.map(i => {
+                                            <div className='courseLargeItemBioSelect'>
+                                            {m.timeAndDose.map(i => {
                                                 return (
                                                     <div key={i.id} className='courseLargeItemBioAdSelects'>
                                                         <div id='input' className='selectContainer'>
-                                                            <div className='selectTitle'>Время</div>
-                                                            <input defaultValue={i.time} type="text"/>
+                                                            <div  className='selectTitle'>Время</div>
+                                                            <input onChange={(e) => {
+                                                                props.setCourseTime(m.GoodsCommercialName,i.id,e.currentTarget.value);
+                                                            }} defaultValue={i.time} type="text"/>
                                                         </div>
                                                         <div className='selectContainer'>
                                                             <div className='selectTitle'>Дозировка</div>
                                                             <div className="doseSelects">
-                                                                <select defaultValue={i.dose}  name="" id="timesPerDay">
+                                                                <select defaultValue={i.dose}  name="" id="timesPerDay"
+                                                                        onChange={(e) => {
+                                                                            props.setCourseDose(m.GoodsCommercialName,i.id,e.currentTarget.value);
+                                                                        }}>
                                                                     <option value="1">1 таблетка</option>
                                                                     <option value="2">2 таблетки</option>
                                                                     <option value="3">3 таблетки</option>
@@ -124,7 +107,13 @@ const CourseLargeByBio = (props) => {
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div onClick={() => {props.removeAdditionalTimeAndDose(i.id)}} className='courseLargeItemContentItemDelIcon'>
+                                                        <div onClick={() => {
+                                                            if(m.timeAndDose.length === 1) {
+                                                                return
+                                                            }
+                                                            props.removeAdditionalTimeAndDose(i.id);
+                                                            m.timesPerDay = m.timesPerDay - 1;
+                                                        }} className={m.timeAndDose.length === 1 ? "courseLargeItemBioContentItemDelIcon disabled" : "courseLargeItemBioContentItemDelIcon"}>
                                                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path fillRule="evenodd" clipRule="evenodd" d="M0.292893 0.292893C0.683417 -0.0976311 1.31658 -0.0976311 1.70711 0.292893L7 5.58579L12.2929 0.292893C12.6834 -0.0976311 13.3166 -0.0976311 13.7071 0.292893C14.0976 0.683417 14.0976 1.31658 13.7071 1.70711L8.41421 7L13.7071 12.2929C14.0976 12.6834 14.0976 13.3166 13.7071 13.7071C13.3166 14.0976 12.6834 14.0976 12.2929 13.7071L7 8.41421L1.70711 13.7071C1.31658 14.0976 0.683417 14.0976 0.292893 13.7071C-0.0976311 13.3166 -0.0976311 12.6834 0.292893 12.2929L5.58579 7L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683417 0.292893 0.292893Z" fill="#A61911"/>
                                                             </svg>
@@ -132,6 +121,11 @@ const CourseLargeByBio = (props) => {
                                                     </div>
                                                 )
                                             })}
+                                            </div>
+
+                                    </div>
+
+
                                         <div className='supplementFacts'>Supplement facts
                                             <span><svg width="14" height="8" viewBox="0 0 14 8" fill="none"
                                                        xmlns="http://www.w3.org/2000/svg">

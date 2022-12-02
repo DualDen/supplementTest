@@ -57,7 +57,8 @@ const Modal = (props) => {
                     </div>
                     <div className='selectContainer'>
                         <div className='selectTitle'>Время</div>
-                        <input defaultValue='11:00' ref={time} onChange={(e) => {
+                        <input maxLength='5' defaultValue='11:00' ref={time} onChange={(e) => {
+                            e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\:]/g, '');
                             props.setTime(time.current.value);
                         }} type="text"/>
                     </div>
@@ -77,21 +78,15 @@ const Modal = (props) => {
                 </div>
                 <div className='addToCourseBtnContainer'>
                 <button onClick={() => {
-                    let filteredTimes = Object.entries(props.times).map(o => o[1].filter(c => c.GoodsCommercialName === props.modal.GoodsCommercialName ));
-                    if (Object.entries(props.times).length === 0) {
-                        props.setTimes({frequencies: props.selects.frequencies, timesPerDay: props.selects.timesPerDay, time:props.selects.time,
-                            dose: props.selects.dose, GoodsCommercialName: props.modal.GoodsCommercialName,Picture: props.modal.Picture, Article: props.modal.Article,
-                            isOpened: false, additionalTimeAndDose: []
-                        });
-                    }
-                    else if(filteredTimes[0].length === 0 && (typeof filteredTimes[1] === 'undefined' || filteredTimes[1].length === 0)) {
-                        props.setTimes({frequencies: props.selects.frequencies, timesPerDay: props.selects.timesPerDay, time:props.selects.time,
-                            dose: props.selects.dose, GoodsCommercialName: props.modal.GoodsCommercialName,Picture: props.modal.Picture, Article: props.modal.Article,
-                            isOpened: false, additionalTimeAndDose: []
-                        });
-                    }
-                    else if(filteredTimes[0].length > 0){
-                        props.setAdditionalTimeAndDose(props.selects.time,props.selects.dose,props.modal.GoodsCommercialName)
+                    props.setTimes({frequencies: props.selects.frequencies, timesPerDay: props.selects.timesPerDay,
+                        GoodsCommercialName: props.modal.GoodsCommercialName,Picture: props.modal.Picture, Article: props.modal.Article,
+                        isOpened: false, timeAndDose: [{time:props.selects.time,dose: props.selects.dose, id:Math.random().toString(16).slice(2)}]
+                    });
+                    if(props.selects.timesPerDay > 1){
+                        for(let i = 0;i < props.selects.timesPerDay - 1; i++) {
+                            props.setAdditionalTimeAndDose(props.selects.time,props.selects.dose,props.modal.GoodsCommercialName)
+                        }
+
                     }
                     props.setIsOpened(false);
                     props.setIsAdded(props.modal.Article);

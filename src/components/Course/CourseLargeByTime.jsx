@@ -47,7 +47,11 @@ const CourseLargeByTime = (props) => {
                                                 {i.GoodsCommercialName}
                                             </div>
                                             <div className='courseLargeItemContentItemSelect'>
-                                                <select defaultValue={i.dose} name="" id="doseSelect">
+                                                <select defaultValue={i.timeAndDose[0].dose} name="" id="doseSelect"
+                                                onChange={(e) => {
+                                                    props.setCourseDose(i.GoodsCommercialName,i.timeAndDose[0].id,e.currentTarget.value);
+
+                                                }}>
                                                     <option value="1">1 таблетка</option>
                                                     <option value="2">2 таблетки</option>
                                                     <option value="3">3 таблетки</option>

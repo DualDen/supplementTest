@@ -1,9 +1,16 @@
 import {connect} from "react-redux";
 import Course from "./Course";
 import {
-    closeAll, removeAdditionalTimeAndDose,
+    closeAll,
+    removeAdditionalTimeAndDose,
     removeCourseItemTimes,
-    removeCourseItemTimesItem, removeFirstAdt,
+    removeCourseItemTimesItem,
+    removeFirstAdt,
+    setAdditionalTimeAndDose,
+    setCourseDose,
+    setCourseFreq,
+    setCourseTime,
+    setCourseTpd,
     setShowMore,
     setTimesIsOpened
 } from "../../Redux/medications-reducer";
@@ -38,6 +45,21 @@ let mapDispatchToProps = (dispatch) => {
         },
         removeFirstAdt: (time) => {
             dispatch(removeFirstAdt(time));
+        },
+        setCourseTime: (name,id,time) => {
+            dispatch(setCourseTime(name,id,time));
+        },
+        setCourseDose: (name,id,dose) => {
+            dispatch(setCourseDose(name,id,dose));
+        },
+        setCourseFreq: (name,frequencies) => {
+            dispatch(setCourseFreq(name,frequencies));
+        },
+        setCourseTpd: (name,timesPerDay) => {
+            dispatch(setCourseTpd(name,timesPerDay));
+        },
+        setAdditionalTimeAndDose: (time,dose,name) => {
+            dispatch(setAdditionalTimeAndDose(time,dose,name));
         }
     }
 }

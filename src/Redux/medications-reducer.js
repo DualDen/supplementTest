@@ -84,11 +84,11 @@ const medicationsReducer = (state = initialState, action) => {
                 showMore: action.showMore,
             }
         case SET_TIMES:
-            if(!state.times[action.times.time]) {
-                state.times[action.times.time] = [];
+            if(!state.times[action.times.timeAndDose[0].time]) {
+                state.times[action.times.timeAndDose[0].time] = [];
             }
             for(const [key,value] of Object.entries(state.times)) {
-                if(key === action.times.time) {
+                if(key === action.times.timeAndDose[0].time) {
                     value.push(action.times);
                 }
             }
@@ -169,7 +169,7 @@ const medicationsReducer = (state = initialState, action) => {
             Object.entries(state.times).map(o => {
                 return o[1].map(m => {
                     if(m.GoodsCommercialName === action.name) {
-                        m.additionalTimeAndDose.push({time: action.time,dose:action.dose,id:Math.random().toString(16).slice(2) });
+                        m.timeAndDose.push({time: action.time,dose:action.dose,id:Math.random().toString(16).slice(2) });
                     }
                 })
             })
@@ -179,11 +179,32 @@ const medicationsReducer = (state = initialState, action) => {
             }
         case REMOVE_ADDITIONAL_TIME_AND_DOSE:
             Object.entries(state.times).map(o => {
-                return o[1].map((m) => {
-                    return m.additionalTimeAndDose.map((i,index) => {
+                return o[1].map((m,ind) => {
+                    if(m.timesPerDay === action.id) {
+                        m.timeAndDose.splice(m.timeAndDose.length - (m.timeAndDose.length - m.timesPerDay),m.timeAndDose.length - m.timesPerDay)
+
+                    }
+                    return m.timeAndDose.map((i,index) => {
                         if (i.id === action.id) {
-                            m.additionalTimeAndDose.splice(index,1);
+                            m.timeAndDose.splice(index,1);
+                            if(index === 0) {
+                                let b = o[1].splice(ind,1);
+                                if(!state.times[m.timeAndDose[0].time]) {
+                                    state.times[m.timeAndDose[0].time] = [];
+                                }
+                                for(const [key,value] of Object.entries(state.times)) {
+                                    if(key === m.timeAndDose[0].time) {
+                                        value.push(b[0]);
+                                    }
+                                }
+                                if(o[1].length === 0) {
+                                    delete state.times[o[0]];
+                                }
+
+                            }
+
                         }
+
 
                     })
                 })
@@ -192,18 +213,79 @@ const medicationsReducer = (state = initialState, action) => {
                 ...state,
                 times: {...state.times}
             }
-        case REMOVE_FIRST_ADT:
+        case SET_COURSE_TIME:
             Object.entries(state.times).map(o => {
-                return o[1].map((m) => {
-                    m.dose = m.additionalTimeAndDose[0].dose;
-                    m.time = m.additionalTimeAndDose[0].time;
-                    m.additionalTimeAndDose.splice(0,1);
+                return o[1].map((m,ind) => {
+                    if(m.GoodsCommercialName === action.name) {
+                        m.timeAndDose.map((i,index) => {
+                            if(i.id === action.id) {
+                                i.time = action.time
+                                if(index === 0) {
+                                    let a = o[1].splice(ind,1);
+                                    if(!state.times[m.timeAndDose[0].time]) {
+                                        state.times[m.timeAndDose[0].time] = [];
+                                    }
+                                    for(const [key,value] of Object.entries(state.times)) {
+                                        if(key === m.timeAndDose[0].time) {
+                                            value.push(a[0]);
+                                        }
+                                    }
+                                    if(o[1].length === 0) {
+                                        delete state.times[o[0]];
+                                    }
+                                }
+
+                            }
+                        })
+                    }
                 })
             })
-            return{
+            return {
                 ...state,
                 times: {...state.times}
             }
+        case SET_COURSE_DOSE:
+            Object.entries(state.times).map(o => {
+                return o[1].map((m) => {
+                    if(m.GoodsCommercialName === action.name) {
+                        m.timeAndDose.map((i) => {
+                            if(i.id === action.id) {
+                                i.dose = action.dose;
+
+                            }
+                        })
+                    }
+                })
+            });
+            return{
+                ...state,
+                times: {...state.times},
+            }
+        case SET_COURSE_FREQ:
+            Object.entries(state.times).map(o => {
+                return o[1].map((m) => {
+                    if(m.GoodsCommercialName === action.name) {
+                        m.frequencies = action.frequencies
+                    }
+                })
+            });
+            return {
+                ...state,
+                times: {...state.times}
+            }
+        case SET_COURSE_TPD:
+            Object.entries(state.times).map(o => {
+                return o[1].map((m) => {
+                    if(m.GoodsCommercialName === action.name) {
+                        m.timesPerDay = action.timesPerDay
+                    }
+                })
+            });
+            return {
+                ...state,
+                times: {...state.times}
+            }
+
 
 
 
@@ -215,6 +297,10 @@ const medicationsReducer = (state = initialState, action) => {
 
 
 }
+let SET_COURSE_TPD = 'SET_COURSE_TPD';
+let SET_COURSE_FREQ = 'SET_COURSE_FREQ';
+let SET_COURSE_DOSE = "SET_COURSE_DOSE";
+let SET_COURSE_TIME = "SET_COURSE_TIME";
 let REMOVE_FIRST_ADT = "REMOVE_FIRST_ADT";
 let REMOVE_ADDITIONAL_TIME_AND_DOSE = "REMOVE_ADDITIONAL_TIME_AND_DOSE";
 let SET_ADDITIONAL_TIME_AND_DOSE = "SET_ADDITIONAL_TIME_AND_DOSE"
@@ -235,6 +321,10 @@ let SET_IS_OPENED = 'SET_IS_OPENED';
 let TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 let SET_MEDICATIONS = "SET_MEDICATIONS";
 let SET_MODAL = "SET_MODAL";
+export let setCourseTpd = (name,timesPerDay) => ({type: SET_COURSE_TPD, name,timesPerDay});
+export let setCourseFreq = (name,frequencies) => ({type: SET_COURSE_FREQ, name,frequencies});
+export let setCourseDose = (name,id,dose) => ({type: SET_COURSE_DOSE, name,id,dose})
+export let setCourseTime = (name,id,time) => ({type:SET_COURSE_TIME,name,id,time})
 export let removeFirstAdt = (time) => ({type: REMOVE_FIRST_ADT,time});
 export let removeAdditionalTimeAndDose = (id) => ({type: REMOVE_ADDITIONAL_TIME_AND_DOSE,id});
 export let setAdditionalTimeAndDose = (time,dose,name) => ({type: SET_ADDITIONAL_TIME_AND_DOSE, time ,dose,name})

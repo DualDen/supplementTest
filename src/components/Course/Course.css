@@ -216,7 +216,7 @@ transform: rotate(0);
 }
 .courseLargeItemName{
     font-weight: 700;
-    width: 100%;
+    width: 50%;
 }
 .courseLargeItemBioContent{
     display: block;
@@ -268,12 +268,30 @@ transform: rotate(0);
 }
 .courseLargeItemBioSelects{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 }
 .courseLargeItemBioAdSelects{
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-top: 20px;
+    margin-bottom: 20px;
     padding-right: 22px;
+}
+.courseLargeItemBioAdSelects:last-child{
+    margin-bottom: 0;
+}
+.courseLargeItemBioSelect{
+    display: flex;
+}
+.courseLargeItemBioSelect:last-child{
+    flex-wrap: wrap;
+    margin-left: 34px;
+}
+.courseLargeItemBioContentItemDelIcon{
+    cursor: pointer;
+    margin-left: 3px;
+    margin-top: 13px;
+}
+.courseLargeItemBioContentItemDelIcon.disabled svg path{
+    fill: rgba(0,0,0,.16);
 }
